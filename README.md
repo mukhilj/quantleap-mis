@@ -6,7 +6,7 @@ This is a local dashboard for reviewing the history of QuantLead automated syste
 
 1. Download this repo (green **Code** button → *Download ZIP*, or `git clone`) and unzip it anywhere.
 2. Do the one-time setup in section 1.
-3. In QuantLead, export the **positions** CSV for each account (pick the widest date range it allows) and drop the files into `inbox\`.
+3. In QuantLead, export the **positions** CSV for each account (pick the widest date range it allows) and save them in a dated subfolder of `quantleap_data\`, e.g. `quantleap_data6-11-13\`.
 4. Copy `config\capital.example.csv` to `config\capital.csv` and enter your own capital per account (optional: without it you get ₹ metrics only, no % returns).
 5. Double-click `import_exports.bat`, type Y, then double-click `run_dashboard.bat`.
 
@@ -34,7 +34,7 @@ Alternatively, run `python -m streamlit run app.py`.
 
 ## 3. Importing new exports
 
-1. Download the QuantLead positions CSVs and drop them into this folder or into `inbox\`. The filenames don't matter.
+1. Download the QuantLead positions CSVs into a new subfolder of **`quantleap_data\`** (suggested: one folder per export date, e.g. `quantleap_data6-12-15\`). Subfolders are scanned recursively and filenames don't matter. `inbox\` also works.
 2. Then do either of the following:
    - Click **Import / refresh** in the dashboard sidebar.
    - Double-click **`import_exports.bat`**. It shows a preview first, then asks Y/N before applying.

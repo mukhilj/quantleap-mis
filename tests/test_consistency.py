@@ -77,9 +77,11 @@ def test_subset_has_no_pct_metrics(env):
 
 def test_source_reconciliation(env):
     """Ledger confirmed totals equal the sum of the original CSVs' filled rows."""
+    from qlmis.ingest import discover
     legs = env[0]
-    tot = 0.0
-    for f in S.root.glob("*.csv"):
-        d = pd.read_csv(f, encoding="utf-8-sig")
-        tot += d.loc[d.entry_status == "COMPLETE", "pnl"].sum()
+    frames = [pd.read_csv(f, encoding="utf-8-sig", dtype={"client_id": str, "position_id": str})
+              for f in discover(S)]                       # oldest file first
+    src = pd.concat(frames, ignore_index=True)
+    src = src[src.position_id.notna()].drop_duplicates(["client_id", "position_id"], keep="last")
+    tot = src.loc[src.entry_status == "COMPLETE", "pnl"].sum()
     assert legs.loc[legs.filled, "pnl"].sum() == pytest.approx(tot)

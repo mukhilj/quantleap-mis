@@ -37,14 +37,14 @@ def sha256_file(p: Path) -> str:
 
 
 def discover(s: Settings) -> list[Path]:
-    """CSV files directly inside configured input dirs, excluding generated/archived folders."""
+    """CSV files anywhere under the configured input dirs (recursive), excluding generated/archived folders."""
     excl = {(s.root / d).resolve() for d in s.exclude_dirs} | {s.archive_dir.resolve(), s.export_dir.resolve()}
     out: list[Path] = []
     for d in s.input_dirs:
         d = d.resolve()
         if not d.exists() or d in excl:
             continue
-        for p in sorted(d.glob("*.csv")):
+        for p in sorted(d.rglob("*.csv")):
             if p.is_file() and not any(parent in excl for parent in p.resolve().parents):
                 out.append(p.resolve())
     # De-duplicate the same path reached via two input dirs.

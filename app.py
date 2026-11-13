@@ -66,7 +66,7 @@ CAPITAL = load_capital(S)
 
 if legs_all.empty:
     st.title("QuantLeap Performance MIS")
-    st.info("The ledger is empty. Put QuantLead exports in the project folder or `inbox/`, then import.")
+    st.info("The ledger is empty. Put QuantLead exports in `quantleap_data/<export-date>/` (or `inbox/`), then import.")
     if st.button("Import now", type="primary"):
         rep = run_import(S)
         st.write(rep.to_dict())

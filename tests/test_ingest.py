@@ -47,6 +47,19 @@ def proj(tmp_path):
     return tmp_path
 
 
+def test_discover_recurses_into_subfolders(proj):
+    from qlmis.config import load_settings
+    from qlmis.ingest import discover
+    nested = proj / "quantleap_data" / "2026-12-01" / "acct2"
+    nested.mkdir(parents=True)
+    csv = "a,b\n1,2\n"
+    (nested / "x.csv").write_text(csv, encoding="utf-8")
+    (proj / "inbox" / "y.csv").write_text(csv, encoding="utf-8")
+    (proj / "archive" / "z.csv").write_text(csv, encoding="utf-8")   # excluded
+    names = {p.name for p in discover(load_settings(proj))}
+    assert names == {"x.csv", "y.csv"}
+
+
 def totals(s):
     con = sqlite3.connect(s.database)
     n, p = con.execute("SELECT COUNT(*), COALESCE(SUM(pnl),0) FROM legs WHERE entry_status='COMPLETE'").fetchone()

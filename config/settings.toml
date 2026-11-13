@@ -3,9 +3,9 @@
 # Paths are relative to the project folder unless absolute.
 
 [paths]
-# Folders scanned (non-recursively) for new source CSVs.
-# The project root holds the original exports; drop future downloads into either.
-input_dirs   = [".", "inbox"]
+# Folders scanned RECURSIVELY for source CSVs (subfolders included).
+# Keep QuantLead exports in quantleap_data/<export-date>/ ; inbox/ also works.
+input_dirs   = ["quantleap_data", "inbox"]
 database     = "data/ledger.sqlite"
 archive_dir  = "archive"
 export_dir   = "exports"
