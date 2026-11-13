@@ -1,0 +1,2 @@
+date,client_id,type,amount_inr,counterparty_client_id,note
+2026-08-14,Z00000,OPENING,1000000,,example opening capital - copy to capital.csv

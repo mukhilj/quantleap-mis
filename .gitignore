@@ -1,0 +1,23 @@
+# --- Trade data stays local (never commit) ---
+*.csv
+!config/holidays.csv
+!config/capital.example.csv
+data/
+archive/
+exports/
+inbox/*
+!inbox/.gitkeep
+*.sqlite
+*.sqlite-journal
+*.xlsx
+
+# --- Python / tooling ---
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+
+# Personal analysis of my own data
+docs/DATA_UNDERSTANDING.md
+config/strategy_aliases.csv

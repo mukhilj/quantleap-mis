@@ -1,0 +1,55 @@
+# QuantLeap MIS dashboard — main settings.
+# Edit with any text editor; restart/refresh the dashboard to apply.
+# Paths are relative to the project folder unless absolute.
+
+[paths]
+# Folders scanned (non-recursively) for new source CSVs.
+# The project root holds the original exports; drop future downloads into either.
+input_dirs   = [".", "inbox"]
+database     = "data/ledger.sqlite"
+archive_dir  = "archive"
+export_dir   = "exports"
+capital_file = "config/capital.csv"
+aliases_file = "config/strategy_aliases.csv"
+holidays_file = "config/holidays.csv"
+# Never scanned for sources (generated output / archived copies).
+exclude_dirs = ["archive", "exports", "data", "docs", "tests", "config", "qlmis"]
+
+[source]
+platform = "quantlead"
+timezone = "Asia/Kolkata"
+# QuantLead purges closed positions this many days after close.
+retention_days = 90
+# An export taken before this IST time on its last close-date is treated as a partial day.
+session_close_ist = "15:30"
+
+[accounts]
+# Optional display labels. Key = client_id exactly as in the export; accounts are
+# discovered automatically from imported files, so this section can stay empty.
+# AB1234 = "Main account"
+
+[calc]
+# |P&L| <= this (₹) counts as breakeven. 0 = only exact zero.
+breakeven_tolerance_inr = 0.0
+# Equity within this many ₹ of its previous peak counts as "recovered".
+drawdown_tolerance_inr = 1.0
+# Periods per year used to annualise daily-return statistics.
+annualisation_days = 252
+# Annual risk-free rate (decimal) for Sharpe. 0.065 = 6.5%.
+risk_free_annual = 0.065
+# Annual minimum acceptable return (decimal) for Sortino.
+sortino_target_annual = 0.0
+# Annualised figures shown with a short-history warning below this many trading days.
+min_days_for_annualised = 252
+
+[charges]
+# ESTIMATED charges model (hypothetical). Source P&L is gross.
+# Applied per executed order: one entry order + one exit order per leg
+# (no exit order for EXPIRY_SETTLED legs). Verify rates against your contract notes.
+brokerage_per_order_inr = 20.0
+stt_sell_pct = 0.15            # % of sell-side premium (options). Verify current rate.
+exchange_txn_pct_nse = 0.03503 # % of premium, NSE options
+exchange_txn_pct_bse = 0.0325  # % of premium, BSE options
+sebi_fee_per_crore_inr = 10.0
+stamp_duty_buy_pct = 0.003     # % of buy-side premium
+gst_pct = 18.0                 # on brokerage + exchange + SEBI fees
