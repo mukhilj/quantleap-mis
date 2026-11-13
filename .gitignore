@@ -21,3 +21,7 @@ venv/
 # Personal analysis of my own data
 docs/DATA_UNDERSTANDING.md
 config/strategy_aliases.csv
+
+# Local launcher runtime
+logs/
+*.lnk

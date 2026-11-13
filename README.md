@@ -26,7 +26,9 @@ Accounts are picked up automatically from the files: one account or many, no con
 
 ## 2. Launch
 
-Double-click **`run_dashboard.bat`**. The dashboard opens at http://localhost:8501. Close the black window to stop it.
+**App-style (recommended):** double-click **`make_shortcuts.bat`** once. It creates a **QuantLeap MIS** shortcut (here and on your Desktop) that starts the server in the background, with no black window, and opens the dashboard in its own Edge/Chrome app window. Double-click it again any time; if the server is already running it just reopens the window. Use **Stop QuantLeap MIS** to shut the server down (closing the window leaves it running). Server log: `logs\streamlit.log`.
+
+**Classic:** double-click **`run_dashboard.bat`**. The dashboard opens at http://localhost:8501. Close the black window to stop it.
 
 Alternatively, run `python -m streamlit run app.py`.
 
